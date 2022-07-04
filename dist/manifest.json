@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "No popup windows",
+    "description": "Automatically moves popup windows into non-popup windows as a new tab.",
+    "version": "0.0.1",
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "**/*"
+            ],
+            "matches": [
+                "*://*/*"
+            ],
+            "use_dynamic_url": true
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "webNavigation"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "lib/draggable.bundle.js",
+                "keepAlive.js"
+            ],
+            "all_frames": false,
+            "run_at": "document_idle"
+        }
+    ],
+    "background": {
+        "service_worker": "monitor.js",
+        "type": "module"
+    },
+    "minimum_chrome_version": "100"
+}
